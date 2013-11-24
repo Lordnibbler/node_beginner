@@ -3,7 +3,7 @@ var http = require('http');
 var url  = require('url');
 
 // route = function route() from router.js
-function start(route) {
+function start(route, handle) {
   // handle a HTTP request
   function onRequest(request, response) {
     // what URL path browser requested
@@ -11,7 +11,7 @@ function start(route) {
     console.log("Request for " + pathname + " received");
 
     // router.js route() function
-    route(pathname);
+    route(handle, pathname);
 
     response.writeHead(200, {'Content-Type': 'text/plain'});
     response.write('Hello World');
