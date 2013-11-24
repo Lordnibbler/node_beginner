@@ -2,13 +2,17 @@
 var http = require('http');
 var url  = require('url');
 
-function start() {
+// route = function route() from router.js
+function start(route) {
   // handle a HTTP request
   function onRequest(request, response) {
     // what URL path browser requested
     var pathname = url.parse(request.url).pathname;
-
     console.log("Request for " + pathname + " received");
+
+    // router.js route() function
+    route(pathname);
+
     response.writeHead(200, {'Content-Type': 'text/plain'});
     response.write('Hello World');
     response.end();
