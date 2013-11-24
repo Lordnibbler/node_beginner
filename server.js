@@ -16,4 +16,5 @@ function start() {
 }
 
 // make start function a module available to other node.js files
+// usage: server.start();
 exports.start = start;
