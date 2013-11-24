@@ -6,28 +6,10 @@ var url  = require('url');
 function start(route, handle) {
   // handle a HTTP request
   function onRequest(request, response) {
-    var postData = '';
-
     // what URL path browser requested
     var pathname = url.parse(request.url).pathname;
     console.log("Request for " + pathname + " received");
-
-    // expect UTF-8 encoding on received/POST data
-    request.setEncoding('utf8');
-
-    // event listener for POST 'data' event
-    request.addListener('data', function(postDataChunk) {
-      postData += postDataChunk;
-      console.log("Received POST data chunk '" + postDataChunk + "'");
-    });
-
-    // event listener for POST 'end' event
-    request.addListener('end', function() {
-      // router.js route() function
-      // response = response callback function
-      route(handle, pathname, response, postData);
-    });
-
+    route(handle, pathname, response, request);
   }
 
   // start the node HTTP server
