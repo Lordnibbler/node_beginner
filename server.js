@@ -1,10 +1,14 @@
 // require the HTTP module
-var http = require("http");
+var http = require('http');
+var url  = require('url');
 
 function start() {
   // handle a HTTP request
   function onRequest(request, response) {
-    console.log("Request received");
+    // what URL path browser requested
+    var pathname = url.parse(request.url).pathname;
+
+    console.log("Request for " + pathname + " received");
     response.writeHead(200, {'Content-Type': 'text/plain'});
     response.write('Hello World');
     response.end();
